@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h2>인덱스</h2>
+	<ol>
+		<li><a href="<%=request.getContextPath()%>/StoreList.jsp">Store List</a></li>
+		<li><a href="<%=request.getContextPath()%>/StaffList.jsp">Staff List</a></li>
+	</ol>
 </body>
 </html>
