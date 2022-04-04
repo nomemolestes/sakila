@@ -13,13 +13,12 @@
 		<li><a href="<%=request.getContextPath()%>/StaffList.jsp">Staff List</a></li>
 	<!-- 뷰7개 리스트만들기 -->
 		<li><a href="<%=request.getContextPath()%>/actorInflist.jsp">ActorInfo List</a></li>
-		<li><a href="<%=request.getContextPath()%>/customerList.jsp">ActorInfo List</a></li>
-		<li><a href="<%=request.getContextPath()%>/filmList.jsp">ActorInfo List</a></li>
-		<li><a href="<%=request.getContextPath()%>/nicerButSlowerFilmList.jsp">ActorInfo List</a></li>
-		<li><a href="<%=request.getContextPath()%>/salesByFilmCategoryList.jsp">ActorInfo List</a></li>
-		<li><a href="<%=request.getContextPath()%>/salesByStoreList.jsp">ActorInfo List</a></li>
-		<li><a href="<%=request.getContextPath()%>/staffViewList.jsp">ActorInfo List</a></li>
-	
+		<li><a href="<%=request.getContextPath()%>/customerList.jsp">customerList</a></li>
+		<li><a href="<%=request.getContextPath()%>/filmList.jsp">filmList</a></li>
+		<li><a href="<%=request.getContextPath()%>/nicerButSlowerFilmList.jsp">nicerButSlowerFilmList</a></li>
+		<li><a href="<%=request.getContextPath()%>/salesByFilmCategoryList.jsp">salesByFilmCategoryList</a></li>
+		<li><a href="<%=request.getContextPath()%>/salesByStoreList.jsp">salesByStoreList</a></li>
+		<li><a href="<%=request.getContextPath()%>/staffViewList.jsp">staffViewList</a></li>
 	</ol>
 </body>
 </html>
