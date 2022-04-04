@@ -9,10 +9,10 @@
 <body>
 	<h2>인덱스</h2>
 	<ol>
-		<li><a href="<%=request.getContextPath()%>/StoreList.jsp">Store List</a></li>
-		<li><a href="<%=request.getContextPath()%>/StaffList.jsp">Staff List</a></li>
+		<li><a href="<%=request.getContextPath()%>/storeList.jsp">Store List</a></li>
+		<li><a href="<%=request.getContextPath()%>/staffList.jsp">Staff List</a></li>
 	<!-- 뷰7개 리스트만들기 -->
-		<li><a href="<%=request.getContextPath()%>/actorInflist.jsp">ActorInfo List</a></li>
+		<li><a href="<%=request.getContextPath()%>/actorInfoList.jsp">ActorInfo List</a></li>
 		<li><a href="<%=request.getContextPath()%>/customerList.jsp">customerList</a></li>
 		<li><a href="<%=request.getContextPath()%>/filmList.jsp">filmList</a></li>
 		<li><a href="<%=request.getContextPath()%>/nicerButSlowerFilmList.jsp">nicerButSlowerFilmList</a></li>
