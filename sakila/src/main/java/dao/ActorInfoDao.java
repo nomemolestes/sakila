@@ -39,7 +39,7 @@ public class ActorInfoDao {
 				e.printStackTrace();
 			}
 		}
-		return list;
+		return list;//반환..............!!!!!!!!!!!!!!!!
 	}
 	
 	// 전체 행의 수를 반환 메서드
