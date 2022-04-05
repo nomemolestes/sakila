@@ -10,7 +10,6 @@
 	}
 	System.out.println("currentPage");//디버깅
 	int rowPerPage = 10;//한페이지의 보여줄 글의 수
-	System.out.println("rowPerPage");//디버깅
 	
 	int beginRow = (currentPage-1)*rowPerPage;//알고리즘, 시작페이지
 	System.out.println("beginRow");//디버깅
