@@ -42,6 +42,33 @@ public class FilmInStockDao {
 		map.put("count", count);
 		return map;
 	}
+	//filmNotInStock
+	public Map<String, Object> filmNotInStockCall(int filmId, int storeId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Connection conn = null;
+		CallableStatement stmt = null;
+		ResultSet rs = null;
+		List<Integer> list = new ArrayList<>();
+		Integer count = 0;
+		conn = DBUtil.getConnection();
+		try {
+			stmt = conn.prepareCall("{call film_not_in_stock(?,?,?)}");
+			stmt.setInt(1, filmId);
+			stmt.setInt(2, storeId);
+			stmt.registerOutParameter(3, Types.INTEGER);
+
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getInt(1));
+			}
+			count = stmt.getInt(3); // 프로시저 3번째 out변수 값
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		map.put("list", list);
+		map.put("count", count);
+		return map;
+	}
 	public static void main(String[] args) {
 		FilmInStockDao fd = new FilmInStockDao();
 		int filmId = 7;
