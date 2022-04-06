@@ -13,11 +13,17 @@
 <head>
 <meta charset="UTF-8">
 <title>filmSearchForm</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<h1>필름 리스트 뷰 검색</h1>
-	<form action="<%=request.getContextPath()%>/filmSearchAction.jsp" method="post">
-		<table border="1">
+	<button type="button" class="btn btn-outline-dark">
+		<a href="<%=request.getContextPath()%>/index.jsp">index</a>
+	</button>
+	<div class="jumbotron">
+  		<h2>film search</h2>
+	</div>
+	<form  action="<%=request.getContextPath()%>/filmSearchAction.jsp" method="post">
+	  <table class="table table-dark table-striped">
 			<tr>
 				<td>카테고리</td>
 				<td>
@@ -63,8 +69,8 @@
 				<td>영화시간</td>
 				<td>
 					<div><input type="radio" name="length" value="" checked="checked">선택안함</div>
-					<div><input type="radio" name="length" value="0">1시간 미만</div><!-- lenght < 60 -->
-					<div><input type="radio" name="length" value="1">1시간 이상</div><!-- lenght >= 60 -->
+					<div><input type="radio" name="length" value="0">1시간 미만</div><!-- length < 60 -->
+					<div><input type="radio" name="length" value="1">1시간 이상</div><!-- length >= 60 -->
 				</td>
 			</tr>
 			<tr>
