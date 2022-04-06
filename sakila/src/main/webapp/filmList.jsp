@@ -3,7 +3,7 @@
 <%@ page import = "dao.*" %>
 <%@ page import = "vo.*" %>
 <%
-	//페이징 묶어서처리, 이전 다음페이지 넘길때 값이 함꼐
+//페이징 묶어서처리, 이전 다음페이지 넘길때 값이 함꼐
 	int currentPage = 1;//현재페이지의 기본값
 	if(request.getParameter("currentPage") != null) {//현재페이지 값이 널이 아니면
 		//다음페이지로 넘기면 오류, ㅣsql에서 값을 못 받는중......
@@ -15,14 +15,13 @@
 	System.out.println(beginRow + "<-beginRow");//디버깅
 	//호출
 	FilmDao filmDao = new FilmDao(); //dao
-	Film film = new Film(); //vo
-	List<Film> list = filmDao.selectFilmListByPage(beginRow, rowPerPage);//페이징
+	FilmList film = new FilmList(); //vo
+	List<FilmList> list = filmDao.selectFilmListByPage(beginRow, rowPerPage);//페이징
 	list = filmDao.selectFilmListByPage(beginRow, rowPerPage);//페이징
 	
 	int lastPage = 0;//마지막페이지
 	int totalCount = filmDao.selectFilmTotalRow();//전체 글의수, 전체행반환메서드 호출
 	lastPage = (int)(Math.ceil((double)totalCount/(double)rowPerPage));//형변환,올림, 입력받은 숫자보다 크거나 같은 정수 중 가장 작은 정수를 리턴
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -53,7 +52,7 @@
 			</thead>
 			<tbody>
 			<%
-				for(Film f : list) {
+			for(FilmList f : list) {
 			%>
 				<tr class="table-secondary">
 					<td><%=f.getFID()%></td>

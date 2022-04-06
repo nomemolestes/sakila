@@ -1,64 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "dao.*" %>
-<%@ page import = "vo.*" %>
-<%@ page import = "java.util.*" %>
+<%@ page import = "java.util.*"%>
+<%@ page import = "dao.*"%>
+<%@ page import = "vo.*"%>
 <%
-	//값을 받아옴
 	String category = request.getParameter("category");
-	String rating = request.getParameter("rating");
-	
-	double price = -1; //0이 존재가능하므로, price데이턱 입력되지 않았을떄
-	if(!request.getParameter("price").equals("")) {//공백이 아니라면
-		//price값을 받아와서 더블타입으로 변경함
+	String title = request.getParameter("title");
+
+	double price = -1; // price 데이터가 입력되지 않았을때
+	if(!request.getParameter("price").equals("")) {
 		price = Double.parseDouble(request.getParameter("price"));
 	}
-	
-	int length = -1;//0이 존재가능하므로, price데이턱 입력되지 않았을떄
-	if(!request.getParameter("length").equals("")) {//공백이 아니라면
-		//length값을 받아오서 정수타입으로 변경함
+	int length = -1; // length 데이터가 입력되지 않았을때
+	if(!request.getParameter("length").equals("")) {
 		length = Integer.parseInt(request.getParameter("length"));
 	}
-	
-	String title = request.getParameter("title");
+	String rating = request.getParameter("rating");
 	String actors = request.getParameter("actors");
 	
-	int beginRow = 0;
-	int rowPerPage = 10;
-	
-	//dao호출
-	FilmDao filmDao = new FilmDao();
-	List<Film> list = filmDao.selectFilmListSearch(beginRow, rowPerPage, category, rating, price, length, title, actors);
-	System.out.println(list.size());//0임
+	//페이징, 묶어서 처리, 이전 다음페이지로 넘길떄 값도 함께 바껴야함
+		int currentPage = 1;//현재페이지의 기본값은 1임
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));//받아온 값을 정수타입으로 바꿈
+		}
+		System.out.println("currentPage");//디버깅
+		int rowPerPage = 10;//한페이지의 보여줄 글의 수
+		
+		int beginRow = 0;
+		beginRow = (currentPage-1)*rowPerPage;//알고리즘, 시작페이지
+		System.out.println("beginRow");//디버깅
+		
+		//호출 !
+		FilmDao filmDao = new FilmDao();
+		List<FilmList> list = filmDao.selectFilmListSearch(beginRow ,rowPerPage ,category, rating, price, length, title, actor);
+		System.out.println(list.size()); // 0
+
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>filmSearchAction</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<title>Insert title here</title>
 </head>
 <body>
-	<div class="jumbotron">
-  		<h2>filmSearchAction</h2>
-	</div>
-	  <table class="table table-dark table-striped">
-	  <%
-	  	for(Film f : list) {
-	  %>
-	  
-			<tr>
-				<td><%=f.getFid()%></td> 
-				<td><%=f.getTitle()%></td> 
-				<td><%=f.getDescription()%></td> 
-				<td><%=f.getCategory()%></td> 
-				<td><%=f.getPrice()%></td> 
-				<td><%=f.getLength()%></td> 
-				<td><%=f.getRating()%></td> 
-				<td><%=f.getActors()%></td> 
-			</tr>	
+	<table border="1">
+	<thead>
+		<tr>
+			<td>FID</td>
+			<td>title</td>
+			<td>description</td>
+			<td>category</td>
+			<td>price</td>
+			<td>length</td>
+			<td>rating</td>
+			<td>actors</td>
+		</tr>
+	</thead>
+	<tbody>
 		<%
-	  	}
-		%>	
-		</table>
+		for(FilmList f : list) {
+		%>
+				<tr>
+					<td><%=f.getFid()%></td>
+					<td><%=f.getTitle()%></td>
+					<td><%=f.getDescription()%></td>
+					<td><%=f.getCategory()%></td>
+					<td><%=f.getPrice()%></td>
+					<td><%=f.getLength()%></td>
+					<td><%=f.getRating()%></td>
+					<td><%=f.getActors()%></td>
+				</tr>
+		<%		
+			}
+		%>
+		</tbody>
+	</table>
 </body>
 </html>
