@@ -39,7 +39,9 @@
 	  			</tr>
 	  			<tr>
 	  				<td>대여일자</td>
-	  				<td><input type="date" name="beginDate"></td>
+	  				<td>
+	  					<input type="date" name="beginDate">~<input type="date" name="endDate">
+	  				</td>
 	  			</tr>
 	  			<tr>
 	  				<td colspan="2">

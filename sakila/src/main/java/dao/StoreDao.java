@@ -5,9 +5,36 @@ import util.DBUtil;
 
 import java.sql.*;
 public class StoreDao {
+	//rentalSearchForm 
 	public List<Integer> selectStoreIdList() {
-		return list;
-	}
+		List<Integer> storeList = new ArrayList<Integer>();
+		//초기화
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		//util호출
+		conn = DBUtil.getConnection();
+		String sql = "select store_id storeId from store";
+		try {
+			 stmt = conn.prepareStatement(sql);
+	         rs = stmt.executeQuery();
+	         while(rs.next()) {
+	        	 storeList.add(rs.getInt("storeId"));
+	         }
+		} catch (Exception e) { // ClassNotFoundException, SQLException두개의 예외를 부모타입 Exception으로 처리 -> 다형성
+				e.printStackTrace();
+			} finally {
+				try {
+					rs.close();
+					stmt.close();
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return storeList;
+		}
+		
 	public List<Map<String, Object>> selectStoreList() {
 		List<Map<String, Object>> list = new ArrayList<>(); // 다형성
 		Connection conn = null;
