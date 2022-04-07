@@ -5,6 +5,9 @@ import util.DBUtil;
 
 import java.sql.*;
 public class StoreDao {
+	public List<Integer> selectStoreIdList() {
+		return list;
+	}
 	public List<Map<String, Object>> selectStoreList() {
 		List<Map<String, Object>> list = new ArrayList<>(); // 다형성
 		Connection conn = null;

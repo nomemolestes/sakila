@@ -48,9 +48,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<table border="1">
+	<button type="button" class="btn btn-outline-dark">
+		<a href="<%=request.getContextPath()%>/index.jsp">index</a>
+	</button>
+	<div class="jumbotron">
+  		<h2>film search</h2>
+	</div>
+	<form  action="<%=request.getContextPath()%>/filmSearchAction.jsp" method="post">
+	  <table class="table table-dark table-striped">
 	<thead>
 		<tr>
 			<td>FID</td>
