@@ -33,6 +33,7 @@
 			<li><a href="<%=request.getContextPath()%>/filmSearchForm.jsp">filmSearchForm</a></li>
 			<!-- 대여일자(검색 출력), 고객(고객id조인), 스토어(스탭id조인), 필름이름(출력-inventory id>film id 조인) 검색 -->
 			<li><a href="<%=request.getContextPath()%>/rentalSearchForm.jsp">rentalSearchForm</a></li>
+		<h4>통계 데이터</h4>
 			
 			
 	</ol>

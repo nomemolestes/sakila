@@ -28,9 +28,9 @@ public class RentalDao {
 	SELECT  
 		r.*,
 		concat(c.first_name,' ',c.last_name) cName,
-		s.store_id storeId,
+		s.staff_id storeId,
 		i.film_id filmId,
-		f.title
+		f.title title
 	FROM rental r 
 	INNER JOIN customer c
 	ON r.customer_id = c.customer_id
@@ -49,7 +49,7 @@ public class RentalDao {
 			+ "		r.*,"
 			+ "		concat(c.first_name,' ',c.last_name) cName,"
 			+ "		s.store_id storeId,"
-			+ "		i.film_id filmId,"
+			+ "		f.film_id,"
 			+ "		f.title"
 			+ " FROM rental r"
 			+ " INNER JOIN customer c"
@@ -57,12 +57,12 @@ public class RentalDao {
 			+ " INNER JOIN staff s"
 			+ " ON r.staff_id = s.staff_id"
 			+ " INNER JOIN inventory i"
-			+ " ON r.inventory_id = i.inventory_id"
+			+ " ON i.inventory_id = r.inventory_id"
 			+ " INNER JOIN film f"
-			+ " ON i.film_id = f.film_id;"
-			+ " where concat(c.first_name,' ',c.last_name";
+			+ " ON f.film_id = i.film_id;"
+			+ " where concat(c.first_name,' ',c.last_name) like ? ";
 		//조건문과 무슨타입의 어떤값을 넣는지...
-		if(storeId == -1 && beginDate.equals("") && endDate.equals("") ) {//경우의수; 모두선택안함 000
+		if(storeId == -1 && beginDate.equals("") && endDate.equals("")) {//경우의수; 모두선택안함 000
 			sql += " order by rental_id limit ?,?";
 			stmt = conn.prepareStatement(sql);//sql호출
 			stmt.setString(1, "%"+customerName+"%");//값 대입
@@ -86,7 +86,7 @@ public class RentalDao {
 			stmt.setInt(4, rowPerPage);//값 대입
 			
 		} else if (storeId == -1 && !beginDate.equals("") && !endDate.equals("")) {//시작과 끝나는날 선택 011
-			sql += " AND r.rental_date between STR_TO_DATE(?, '%Y-%m-%d') AND now() order by rental_id limit?,?";
+			sql += " AND r.rental_date between STR_TO_DATE(?, '%Y-%m-%d') AND STR_TO_DATE(?,'%Y-%m-%d') order by rental_id limit?,?";
 			stmt = conn.prepareStatement(sql);//sql호출
 			stmt.setString(1, "%"+customerName+"%");//값 대입
 			stmt.setString(2, beginDate);//값 대입
@@ -112,7 +112,7 @@ public class RentalDao {
 			stmt.setInt(5, rowPerPage);//값 대입
 			
 		} else if (storeId != -1 && beginDate.equals("") && !endDate.equals("")) {//가게번호, 끝나는날 선택 101
-			sql += " and and s.store_id=? and between STR_TO_DATE(0000-01-01, '%Y-%m-%d') AND STR_TO_DATE(?, '%Y-%m-%d') order by rental_id limit ?,?";
+			sql += " and and s.store_id=? and r. rental_date between STR_TO_DATE(0000-01-01, '%Y-%m-%d') AND STR_TO_DATE(?, '%Y-%m-%d') order by rental_id limit ?,?";
 			stmt = conn.prepareStatement(sql);//sql호출
 			stmt.setString(1, "%"+customerName+"%");//값 대입
 			stmt.setInt(2, storeId);//값 대입
@@ -160,7 +160,7 @@ public class RentalDao {
 		return rentalList;
 	}
 	public int selectRentalSearchTotalRow(int storeId, String customerName, String beginDate, String endDate) {
-		int totalCount = 0;
+		int totalRow = 0;
 		//초기화
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -176,10 +176,10 @@ public class RentalDao {
 					+ " INNER JOIN staff s"
 					+ " ON r.staff_id = s.staff_id"
 					+ " INNER JOIN inventory i"
-					+ " ON r.inventory_id = i.inventory_id"
+					+ " ON i.inventory_id = r.inventory_id"
 					+ " INNER JOIN film f"
-					+ " ON i.film_id = f.film_id;"
-					+ " where concat(c.first_name, ' ', c.last_name) like ?";
+					+ " ON f.film_id = i.film_id;"
+					+ " where concat(c.first_name,' ', c.last_name) like ?";
 			//조건문과 무슨타입의 어떤값을 넣는지...
 			if(storeId == -1 && beginDate.equals("") && endDate.equals("") ) {//경우의수; 모두선택안함 000
 				stmt = conn.prepareStatement(sql);//sql호출
@@ -234,7 +234,7 @@ public class RentalDao {
 			} 
 			rs = stmt.executeQuery();
 			if(rs.next()) {
-				totalCount = rs.getInt("cnt");
+				totalRow = rs.getInt("cnt");
 			}
 		}	catch (SQLException e) {
 			e.printStackTrace();
@@ -249,7 +249,7 @@ public class RentalDao {
 			}
 		}
 		//반환
-		return totalCount;
+		return totalRow;
 	}
 	
 }
