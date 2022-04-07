@@ -46,11 +46,9 @@ public class RentalDao {
 
 			 */
 		String sql = "SELECT"
-			+ "		r.*,"
-			+ "		concat(c.first_name,' ',c.last_name) cName,"
-			+ "		s.store_id storeId,"
-			+ "		f.film_id,"
-			+ "		f.title"
+			+ "	r.rental_id rentalId, r.rental_date rentalDate, r.inventory_id inventoryId,"
+			+ " r.customer_id customerId, r.return_date returnDate, r.staff_id staffId, r.last_update lastUpdate"
+	    	+ "	CONCAT(c.first_name ,' ', c.last_name) cName,"
 			+ " FROM rental r"
 			+ " INNER JOIN customer c"
 			+ " on r.customer_id = c.customer_id"
