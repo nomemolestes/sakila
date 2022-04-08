@@ -3,7 +3,7 @@
 <%@ page import = "dao.*"%>
 <%@ page import = "vo.*"%>
 <%
-	String category = request.getParameter("category");
+String category = request.getParameter("category");
 	String title = request.getParameter("title");
 
 	double price = -1; // price 데이터가 입력되지 않았을때
@@ -32,7 +32,7 @@
 	
 	//호출 !
 	FilmDao filmDao = new FilmDao();
-	List<FilmList> list = filmDao.selectFilmListSearch(beginRow, rowPerPage,  title, category, price, length, rating, actor);
+	List<FilmList> list = filmDao.selectFilmListSearch(beginRow, rowPerPage, title, category, price, length, rating, actor);
 	int totalCount = filmDao.selectFilmSearchTotalRow(category, rating, price, length, title, actor);
 	System.out.println(list.size()); // 0
 	if (totalCount % rowPerPage == 0) {
@@ -40,7 +40,6 @@
 	} else {
 		lastPage =(totalCount / rowPerPage) + 1;
 	}
-	
 %>
 
 <!DOCTYPE html>
@@ -58,7 +57,7 @@
   		<h2>film search</h2>
 	</div>
 	<form  action="<%=request.getContextPath()%>/filmSearchAction.jsp" method="post">
-	  <table class="table table-dark table-striped">
+		<table class="table table-hover">
 	<thead>
 		<tr>
 			<td>FID</td>
