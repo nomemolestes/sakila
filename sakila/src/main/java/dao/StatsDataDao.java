@@ -168,10 +168,10 @@ public class StatsDataDao {
 		//쿼리문 작성
 		String sql = "SELECT t.length2, COUNT(*) cnt"
 				+" 		FROM (SELECT title, LENGTH,"
-				+"		CASE when LENGTH <= 60 then '0"
-				+" 		when length BETWEEN 60 AND 120 then '60'"
-				+"		when length between 121 AND 180 then '120'"
-				+"			  ELSE '180'"	
+				+"		CASE when LENGTH <= 60 then 0"
+				+" 		when length BETWEEN 60 AND 120 then 6"
+				+"		when length between 121 AND 180 then 120"
+				+"			  ELSE 180"	
 				+"		end  LENGTH2"
 				+"		FROM film) t"
 				+"		GROUP BY t.length2";
