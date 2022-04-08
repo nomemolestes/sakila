@@ -14,7 +14,7 @@ public class StoreDao {
 		ResultSet rs = null;
 		//util호출
 		conn = DBUtil.getConnection();
-		String sql = "select store_id storeId from store";
+		String sql = "SELECT DISTINCT store_id storeId FROM store ORDER BY storeId";
 		try {
 			 stmt = conn.prepareStatement(sql);
 	         rs = stmt.executeQuery();
