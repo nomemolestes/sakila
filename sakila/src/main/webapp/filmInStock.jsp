@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "java.sql.*" %>
+<%@ page import = "java.util.*" %>
+<%@ page import = "dao.*" %>
+<%@ page import = "vo.*" %>
+
 	<%
 	int filmId = 0;//초기화
 	if(request.getParameter("filmId") !=null) { //filmId값이 널이 아니라면
@@ -13,7 +16,7 @@
 	//호출
 	FilmInStockDao filmInStockDao = new FilmInStockDao();
 	Map<String, Object> map = filmInStockDao.filmInStockCall(filmId, storeId);
-	List<Integer> inventoryList = (List<Integer>)map.get("list");
+	List<Integer> inventoryList = (List<Integer>)(map.get("list"));
 	count = (Integer)map.get("count");
 	
 	%>
@@ -41,20 +44,14 @@
 			</thead>
 			<tbody>
 				<%
-					for(Film fd : list) {
+				for(int i : inventoryList) {
 				%>
 					<tr>
-						<td><%=fd.%></td>
-						<td><%=%></td>
-						<td><%=%></td>
-						<td><%=%></td>						
+						<td><%=i%></td>
 					</tr>
 				<%		
 					}
 				%>
-				
-
-
 			</tbody>
 		</table>
 </body>

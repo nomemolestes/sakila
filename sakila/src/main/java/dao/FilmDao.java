@@ -14,7 +14,7 @@ public class FilmDao {
 	/* public int totalRow(String category, String rating, double price, int length, String title, String actors) {//분기시켜서 카운트리턴.
 		
 	} */
-	//Film vo~
+	//가게번호(1,2)에 따른 검색
 		public List<FilmList> selectFilmListSearch(int beginRow, int rowPerPage,  String title, String category, double price, int length, String rating, String actor) {		
 			List<FilmList> list = new ArrayList<FilmList>();//데이터 저장
 			//초기화
@@ -222,6 +222,7 @@ public class FilmDao {
 			}
 			return list;
 		}
+		//검색결과
 		public int selectFilmSearchTotalRow(String category, String rating, double price, int length, String title, String actor) {
 			int totalCount = 0;
 			//초기화
@@ -386,7 +387,7 @@ public class FilmDao {
 			//반환
 			return totalCount;
 		}
-	//임대료 0.99 2.99 4.99를 가져오려고 ,
+	//임대료 0.99 2.99 4.99를 가져오려고
 	public List<Double> selectfilmPriceList() {
 	      List<Double> priceList = new ArrayList<Double>();
 	      Connection conn = null;
@@ -438,6 +439,7 @@ public class FilmDao {
 				f.setLength(rs.getInt("length"));
 				f.setRating(rs.getString("rating"));
 				f.setActors(rs.getString("actors"));
+				list.add(f);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -454,6 +456,7 @@ public class FilmDao {
 		}
 		return list;//반환 !
 	}
+	//전체행반환메서드
 	public int selectFilmTotalRow() {
 		int row = 0;
 		Connection conn = null;
