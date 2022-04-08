@@ -16,8 +16,8 @@
 		<h4>뷰 리스트</h4>
 			<li><a href="<%=request.getContextPath()%>/actorInfoList.jsp">ActorInfo List</a></li>
 			<li><a href="<%=request.getContextPath()%>/customerList.jsp">customerList</a></li>
-	<!-- *******작성중******* -->
 			<li><a href="<%=request.getContextPath()%>/filmList.jsp">filmList</a></li>
+			
 			<li><a href="<%=request.getContextPath()%>/nicerButSlowerFilmList.jsp">nicerButSlowerFilmList</a></li>
 			<li><a href="<%=request.getContextPath()%>/salesByFilmCategoryList.jsp">salesByFilmCategoryList</a></li>
 			<li><a href="<%=request.getContextPath()%>/salesByStoreList.jsp">salesByStoreList</a></li>
@@ -34,7 +34,7 @@
 			<!-- 대여일자(검색 출력), 고객(고객id조인), 스토어(스탭id조인), 필름이름(출력-inventory id>film id 조인) 검색 -->
 			<li><a href="<%=request.getContextPath()%>/rentalSearchForm.jsp">rentalSearchForm</a></li>
 		<h4>통계 데이터</h4>
-			
+			<li><a href="<%=request.getContextPath()%>/statsData.jsp">statsData</a></li>
 			
 	</ol>
 </body>

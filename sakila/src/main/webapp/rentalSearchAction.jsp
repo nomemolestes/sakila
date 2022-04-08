@@ -49,7 +49,7 @@
 		<a href="<%=request.getContextPath()%>/index.jsp">index</a>
 	</button>
 	<div class="jumbotron">
-			<h3>rentalSearch</h3>
+			<h3>대여 상세검색 결과</h3>
 		</div>
 		<table class="table table-hover">
 			<thead>

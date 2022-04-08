@@ -40,7 +40,7 @@
 		<table>
 			<thead>
 				<tr class="table-secondary">
-					<td>FID</td>
+					<td>fid</td>
 					<td>title</td>
 					<td>description</td>
 					<td>category</td>
@@ -55,7 +55,7 @@
 			for(FilmList f : list) {
 			%>
 				<tr class="table-secondary">
-					<td><%=f.getFID()%></td>
+					<td><%=f.getFid()%></td>
 					<td><%=f.getTitle() %></td>
 					<td><%=f.getDescription() %></td>
 					<td><%=f.getCategory() %></td>
@@ -70,15 +70,17 @@
 			</tbody>
 		</table>
 		<div>
+		<!-- 다음페이지로 넘겨도 값이 나오도록 수정 -->
 			<%
 				if(currentPage > 1) {
 			%>
 			<button type="button" class="btn btn-outline-secondary">
-				<a href="<%=request.getContextPath()%>/filmList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+					<a href="<%=request.getContextPath()%>/filmList.jsp?currentPage=<%=currentPage-1%>">이전</a>
 			</button>	
 			<%		
 				}
 			%>
+		<!-- 다음페이지로 넘겨도 값이 나오도록 수정 -->
 			<%
 				if(currentPage < lastPage) {
 			%>
