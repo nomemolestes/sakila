@@ -40,7 +40,7 @@ public class RewardDao { //rewards_report call
 				rewardMap.put("lastName", rs.getString("lastName"));
 				rewardMap.put("email", rs.getString("email"));
 				rewardMap.put("addressId", rs.getString("addressId"));
-				rewardMap.put("acrive", rs.getString("active"));
+				rewardMap.put("active", rs.getString("active"));
 				rewardMap.put("createDate", rs.getString("createDate"));
 				rewardMap.put("lastUpdate", rs.getString("lastUpdate"));
 				list.add(rewardMap);
