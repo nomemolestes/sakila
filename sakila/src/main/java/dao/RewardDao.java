@@ -12,7 +12,8 @@ import java.util.Map;
 import util.DBUtil;
 
 public class RewardDao { //rewards_report call
-	public Map<String, Object> rewardsReportCall(int minMonthlyPurchase, int minDollarAmountPurchase) {
+	
+	public Map<String, Object> rewardsReportCall(int minMonthlyPurchase, double minDollarAmountPurchase) {
 		  Map<String, Object> map = new HashMap<String,Object>();//해시맵에 데이터를 저장
 		  ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();//데이터 저장
 		  //db 초기화
