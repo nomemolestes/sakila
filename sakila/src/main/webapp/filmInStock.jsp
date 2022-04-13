@@ -35,24 +35,25 @@
   		<h2>filmInStock</h2>
 		</div>
 		  <table class="table table-dark table-striped">
-			<thead>
-				<tr>
-					<th>filmId</th>
-					<th>storeId</th>
-					<th>inventoryId</th>
-				</tr>
-			</thead>
-			<tbody>
+		  	<thead>
+		  		<tr>
+		  			<th>상점번호</th>
+		  			<td>재고목록</td>
+		  			<td>재고수량</td>
+		  		</tr>
+		  	</thead>
 				<%
-				for(int i : inventoryList) {
+					for(int i : inventoryList) {
 				%>
 					<tr>
+						<td><%=storeId %></td>
 						<td><%=i%></td>
+						<td><%=count %></td>
 					</tr>
+
 				<%		
 					}
 				%>
-			</tbody>
 		</table>
 </body>
 </html>
