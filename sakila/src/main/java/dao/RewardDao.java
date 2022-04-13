@@ -7,53 +7,55 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import util.DBUtil;
 
 public class RewardDao { //rewards_report call
-	
-	public Map<String, Object> rewardsReportCall(int minMonthlyPurchase, double minDollarAmountPurchase) {
-		  Map<String, Object> map = new HashMap<String,Object>();//해시맵에 데이터를 저장
-		  ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();//데이터 저장
-		  //db 초기화
-	      Connection conn = null;
-	      CallableStatement stmt = null; //프로시저 실행용 인터페이스
-	      ResultSet rs = null;
-	      //쿼리의 count 변수 초기화
-	      Integer count = 0;
-	      //DBUtil 호출
-	      conn = DBUtil.getConnection();
-	      //try catch
-	      try {
-	    	  //쿼리호출?전송?
-	         stmt = conn.prepareCall("{CALL rewards_report(?,?,?)}");//프로시저 호출하는 메서드
-	         stmt.setInt(1, minMonthlyPurchase);//몇번째 물음표가 무엇인지, 프로시저에 사용할 인자값?이 무엇인지에대해
-	         stmt.setDouble(2, minDollarAmountPurchase);//몇번째 물음표가 무엇인지
-	         stmt.registerOutParameter(3, Types.INTEGER);//프로시저에서 넘어오는값
-	         rs = stmt.executeQuery();
-	         count = stmt.getInt(3);
-			while(rs.next()) {
-				HashMap<String, Object> rewardMap = new HashMap<String, Object>(); 
-				rewardMap.put("customerId", rs.getInt("customerId"));
-				rewardMap.put("storeId", rs.getInt("storeId"));
-				rewardMap.put("firstName", rs.getString("firstName"));
-				rewardMap.put("lastName", rs.getString("lastName"));
-				rewardMap.put("email", rs.getString("email"));
-				rewardMap.put("addressId", rs.getString("addressId"));
-				rewardMap.put("active", rs.getString("active"));
-				rewardMap.put("createDate", rs.getString("createDate"));
-				rewardMap.put("lastUpdate", rs.getString("lastUpdate"));
-				list.add(rewardMap);
-			}
-			count = stmt.getInt(3); 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-	      map.put("count", count);
-	      map.put("list", list);
-	
-	      return map;
-	}
-
+		 public Map<String, Object> rewardsReportCall(int minMonthlyPurchase, double minDollarAmountPurchase) {
+			  List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+			  Map<String, Object> map = null;
+		      Connection conn = null;
+		      CallableStatement stmt = null; 
+		      ResultSet rs = null;
+		      Integer count = 0;
+		      conn = DBUtil.getConnection();
+		      try {
+		         stmt = conn.prepareCall("{CALL rewards_report(?,?,?)}");
+		         stmt.setInt(1, minMonthlyPurchase);
+		         stmt.setDouble(2, minDollarAmountPurchase);
+		         stmt.registerOutParameter(3, Types.INTEGER);
+		         rs = stmt.executeQuery();
+		         count = stmt.getInt(3); // 프로시저 3번째 out변수 값 
+		         while(rs.next()) {
+		        	Map<String,Object> tempMap = new HashMap<String,Object>();
+		        	tempMap.put("customerId",rs.getInt("customer_id"));
+		        	tempMap.put("storeId",rs.getInt("store_id"));
+		        	tempMap.put("firstName",rs.getString("first_name"));
+		        	tempMap.put("lastName",rs.getString("last_name"));
+		        	tempMap.put("email",rs.getString("email"));
+		        	tempMap.put("addressId",rs.getInt("address_id"));
+		        	tempMap.put("active",rs.getInt("active"));
+		        	tempMap.put("createDate",rs.getString("create_date"));
+		        	tempMap.put("lastUpdate",rs.getString("last_update"));
+		            list.add(tempMap);
+		         }
+		         map = new HashMap<String, Object>(); 
+		         map.put("count", stmt.getInt(3)); 
+		         map.put("list", list); 
+		      } catch (SQLException e) {
+		         e.printStackTrace();
+		      }  finally {
+		    	  try {
+		            //반납
+		            rs.close();
+		            stmt.close();
+		            conn.close();
+		         } catch (SQLException e) {
+		            e.printStackTrace();
+		         }
+		      }
+		      return map;
+		   }
 }

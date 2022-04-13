@@ -15,16 +15,16 @@
 		<h2>rewardsReportForm</h2>
 	</div>
 	  <table class="table table-dark table-striped">
-	  	<form action ="<%=request.getContextPath()%>/rewardReport.jsp" method = "post">
+	  	<form action ="<%=request.getContextPath()%>/rewardsReport.jsp" method = "post">
 	  		<table class = "table table-hover">
 	  			<tr>
 	  				<td>minMonthlyPurchase</td>
 	  				<td>
-	  					<input type="number" name="minMonthlyPurchase">
+	  					<input type="text" name="minMonthlyPurchase">
 	  				</td>	
 	  				<td>minDollarAmountPurchase</td>
 	  				<td>
-	  					<input type="number" name="minAmount">
+	  					<input type="text" name="minDollarAmountPurchase">
 	  				</td>
 	  			</tr>
 	  		</table>
