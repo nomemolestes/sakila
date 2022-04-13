@@ -39,21 +39,22 @@
 		  		<tr>
 		  			<th>상점번호</th>
 		  			<td>재고목록</td>
-		  			<td>재고수량</td>
+		  			<td>재고수량 : <%=count %></td>
 		  		</tr>
 		  	</thead>
+		  	<tbody>
 				<%
 					for(int i : inventoryList) {
 				%>
 					<tr>
 						<td><%=storeId %></td>
 						<td><%=i%></td>
-						<td><%=count %></td>
 					</tr>
 
 				<%		
 					}
 				%>
+			</tbody>
 		</table>
 </body>
 </html>

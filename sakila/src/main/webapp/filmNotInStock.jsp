@@ -15,10 +15,14 @@
 		storeId =Integer.parseInt(request.getParameter("storeId"));
 	}
 	//호출
-	FilmInStockDao filmInStockDao = new FilmInStockDao();
-	Map<String, Object> map = filmInStockDao.filmNotInStockCall(filmId, storeId);
+	FilmNotInStockDao filmNotInStockDao = new FilmNotInStockDao();
+	Map<String, Object> map = filmNotInStockDao.filmNotInStockCall(filmId, storeId);
 	List<Integer> invontoryList = (List<Integer>)(map.get("list"));
 	count = (Integer)map.get("count");
+	//디버깅
+	System.out.println(filmId + "<-filmId");
+	System.out.println(storeId + "<-storeId");
+	System.out.println(count + "<-count");
 	
 %>
 <!DOCTYPE html>
